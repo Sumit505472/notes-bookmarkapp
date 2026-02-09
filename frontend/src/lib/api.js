@@ -1,5 +1,11 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api';
 
+// Log the API URL for debugging
+if (typeof window !== 'undefined') {
+  console.log('API Base URL:', API_BASE_URL);
+  console.log('NEXT_PUBLIC_API_URL env:', process.env.NEXT_PUBLIC_API_URL);
+}
+
 // Helper function to get authorization headers
 const getAuthHeaders = () => {
   const token = typeof window !== 'undefined' ? localStorage.getItem('token') : null;
