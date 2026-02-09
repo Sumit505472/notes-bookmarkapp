@@ -14,8 +14,17 @@ const { protect } = require('./middleware/auth');
 
 const app = express();
 
+// CORS Configuration
+const corsOptions = {
+  origin: process.env.NODE_ENV === 'production' 
+    ? (process.env.FRONTEND_URL ? process.env.FRONTEND_URL.split(',') : [])
+    : ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+};
 
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
