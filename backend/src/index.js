@@ -16,30 +16,8 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: function (origin, callback) {
-    // Allowed origins
-    const allowedOrigins = [
-      'http://localhost:3000',
-      'http://localhost:3001',
-      'http://127.0.0.1:3000',
-      'http://127.0.0.1:3001',
-    ];
-
-    // Add frontend URLs from environment variable
-    if (process.env.FRONTEND_URL) {
-      process.env.FRONTEND_URL.split(',').forEach(url => {
-        allowedOrigins.push(url.trim());
-      });
-    }
-
-    // Allow requests with no origin (like mobile apps, Postman, etc.)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('CORS not allowed'));
-    }
-  },
-  credentials: true,
+  origin: '*', // Allow all origins for now (we'll restrict later)
+  credentials: false,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
   optionsSuccessStatus: 200
